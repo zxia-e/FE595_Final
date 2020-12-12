@@ -1,1 +1,35 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Option Pricing Calculator - FE595 Final</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script></head><script>function myFunction() {
+var text1= $('#text1').val(), text2= $('#text2').val(), text3= $('#text3').val(),text4= $('#text4').val(),text5= $('#text5').val(),text6= $('#text6').val(),text7= $('#text7').val(),text8= $('#text8').val();
+  $.ajax({
+              url: "/join",
+              type: "POST",
+              data: {text1:text1, text2:text2, text3:text3, text4:text4, text5:text5, text6:text6, text7:text7, text8:text8}          }).done(function(response) {            var html= "<br><br><br><p> <b> Price : <b><p>";            response =response.result;
+                 $.each(response,function(key,val){
+                 console.log(val);
+                    html+="<p>"+val+"<p>"                });
+                html +="<br>";
+                $(".show-data").append(html);
+            });
+};  </script>
+<body>
+    <p>
+        Taking input from user: all parameters and option type<br><br>            
+        K (Strike Price): <input type="float" id="text1" name="text1"><br><br>  
+        S0 (Original Price): <input type="float" id="text2" name="text2"><br><br>
+        r (interest rate): <input type="float" id="text3" name="text3"><br><br>
+        sigma (volatility): <input type="float" id="text4" name="text4"><br><br>
+        T (Time): <input type="int" id="text5" name="text5"><br><br>
+        N (Interval): <input type="int" id="text6" name="text6"><br><br>
+        scenario: <input type="int" id="text7" name="text7"><br><br>
+        (Asian) or (European): <input type="text" id="text8" name="text8"><br><br>
+        (Users must follow input instructions!!!!)<br><br>
+        <button id="clicked" onclick="myFunction()">Submit</button>
+        </p>
+    <div class="show-data" >    </div>
+</body>
+</html>
